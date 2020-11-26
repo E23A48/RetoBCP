@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="floating-logo">
+    <img width="125" src="https://stbcpzonasegura.viabcp.com/assets/img/logo.svg">
+  </div>
+  <div class="row">
+      <div class="col-lg-3 col-md-2"></div>
+      <div class="col-lg-6 col-md-8 login-box">
+          <h4>RetoBCP: Login Simulacion</h4>
+          <div class="col-lg-12 login-form">
+              <div class="col-lg-12 login-form">
+                  <form method="POST">
+                      <div class="form-group">
+                          <label class="form-control-label">Nombre de usuario</label>
+                          <input [(ngModel)]="user.username" name="username" id="username" type="text" class="form-control">
+                          <i class="icon fa fa-user fa-lg"></i>
+                      </div>
+                      <div class="form-group">
+                          <label class="form-control-label">Clave de usuario</label>
+                          <input [(ngModel)]="user.password" name="password" id="password" type="password" class="form-control" i>
+                          <i class="icon fa fa-unlock-alt fa-lg"></i>
+                      </div>
+                        <button (click)="login()" class="btn btn-primary btn-lg btn-block" type="submit">
+                          Ingresar <i class="fa fa-arrow-right"></i>
+                        </button>
+
+                  </form>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-2"></div>
+      </div>
+  </div>
+
+
+
+

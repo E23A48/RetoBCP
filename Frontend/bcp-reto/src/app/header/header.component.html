@@ -1,0 +1,145 @@
+<header class="backdrop">
+  <div class="backdrop">
+    <div class="container-sm" style="max-width:	990px">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"><figure><img src="https://stbcpzonasegura.viabcp.com/assets/img/logo.svg" width="120px" alt="logo"></figure></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav navbar-principal ml-auto">
+            <li class="nav-item active n-item">
+              <a class="nav-link" href="#">Inicio</a>
+            </li>
+            <li class="nav-item n-item">
+              <a class="nav-link" href="#">Transferencias</a>
+            </li>
+            <li class="nav-item n-item">
+              <a class="nav-link" href="#">Pagos</a>
+            </li>
+            <li class="nav-item n-item">
+              <a class="nav-link" href="#">Mas operaciones</a>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-user"></i>
+            </li>
+            <li style="margin-left: 7px" (click)="setCountNewNotifys()" class="nav-item nav-item-bell" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="total-notifications" *ngIf="countNewNotify > 0">{{ countNewNotify }}</div>
+              <i class="fas fa-bell"></i>
+              <div class="dropdown-menu dropdown-menu-right">
+                <h5 class="dropdown-header">Notificaciones <a href="" data-toggle="tooltip" data-placement="left" title="Configuracion"><i class="fas fa-cog"></i></a></h5>
+                <div class="dropdown-divider"></div>
+                <ul class="notify-list" id="scrollbar_2">
+                  <li class="single-notification" *ngFor="let notify of notifys">
+                    <div class="row">
+                      <div class="col-2"><img src="{{ notify.icon_img }}" width="55" height="55" class="rounded-circle"></div>
+                      <div class="col-10">
+                        <p class="notify-title">{{ notify.title }}</p>
+                        <p class="notify-detail">{{ notify.message }}</p>
+
+                        <p class="notify-date">{{  moment(notify.creadtedAt, "YYYY-MM-DDTHH:mm:ss:SSZ").fromNow() }}</p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="col-8">
+          <h2>Banca por internet</h2>
+          <p class="special-color">Lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>
+        </div>
+        <div class="col-4" style="text-align: right">
+          <h6>Último acceso</h6>
+          <p class="special-color">{{ loginTime }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<div class="content">
+
+<div class="container principal-body" style="max-width:	990px">
+  <div class="row">
+    <div class="col-8">
+      <div class="simple-box">
+        <h3><span class="divider"></span> <i class="fas fa-bell bell-box"></i>Historial de Notificaciones</h3>
+
+      
+      <div class="row no-gutters snoti">
+          <div class="col">
+              <input [(ngModel)]="searchText" placeholder="Buscar notificacion" class="form-control search-notify" type="search" value="search" id="example-search-input4">
+          </div>
+          <div class="col-auto">
+              <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right" type="button">
+                  <i class="fa fa-search"></i>
+              </button>
+          </div>
+      </div>
+
+      <ul class="notify-home" id="scrollbar_2">
+        <li class="row" *ngFor="let notify of notifys | filter:searchText">
+          <div class="col">
+            <img width="55" height="55" class="img-box rounded-circle" src="{{notify.icon_img}}">
+            <p class="nf-category">{{notify.category.name}}</p>
+          </div>
+          <div class="col-8"><p class="nf-title">{{notify.title}}</p><p class="nf-detail">{{notify.message}}</p><p class="nf-date">Enviado el {{moment(notify.creadtedAt, "YYYY-MM-DDTHH:mm:ss:SSZ").format('D [de] MMMM [de] YYYY, h:mm:ss a')}}</p></div>
+          <div class="col">
+            <i (click)="deleteNotify(notify.id, index)" class="fa fa-trash icon-box"></i>
+          </div>
+        </li>
+      </ul>
+      <br>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="simple-box">
+        <h3><span class="divider"></span> <i class="fas fa-cog bell-box"></i>Configuración</h3>
+        <p class="sb-text">Elige que notificaciones quieres ver</p>
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+
+          <!-- Accordion Item 1 -->
+          <div class="card" *ngFor="let category of categories">
+            <div class="card-header" role="tab" id="accordionHeadingOne">
+              <div class="mb-0 row">
+                <div class="col-12 no-padding accordion-head">
+
+                    <div class="row">
+                      <div class="col-2">
+                        <i class="fas fa-bell fa-simple-icon"></i>
+                      </div>
+                      <div class="col-10">
+                      <i class="" aria-hidden="true">
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input" id="customSwitch1-{{category.name}}">
+                          <label class="custom-control-label" for="customSwitch1-{{category.name}}"></label>
+                        </div>
+                      </i>
+                      {{ category.name }}<br><p class="little-detail">Web, Push, SMS</p>
+                      </div>
+                      
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="container" style="max-width:	990px">
+  2020 RetoBCP, Diseño de <a href="https://www.viabcp.com/">BCP</a>
+</footer>
+
+
+</div>
